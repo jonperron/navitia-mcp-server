@@ -70,6 +70,7 @@ dmypy.json
 
 # UV package manager
 .uv/
+uv.lock
 
 # PyCharm
 .idea/
