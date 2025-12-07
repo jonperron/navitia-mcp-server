@@ -9,7 +9,6 @@ This MCP server exposes the following tools:
 ### Journey Planning
 
 - **find_journey**: Find transit routes between two locations with real-time data
-- **find_journey_with_options**: Advanced journey search with custom parameters
 
 ### Transit Information
 
@@ -26,7 +25,7 @@ This MCP server exposes the following tools:
 
 ## Prerequisites
 
-- Python >= 3.10
+- Python >= 3.13
 - A Navitia API token from [navitia.io](https://navitia.io/tarifs/)
 
 ## Installation
@@ -109,7 +108,7 @@ Search for places (stops, addresses, POIs).
 **Parameters:**
 
 - `query` (str, required): Search query
-- `region_id` (str, optional): Limit search to specific region
+- `region_id` (str, required): Limit search to specific region
 - `type` (list[str], optional): Types to search: "stop_area", "address", "poi", etc.
 
 **Returns:** List of matching places with details
@@ -121,7 +120,7 @@ Find transit options near a location.
 **Parameters:**
 
 - `location` (str, required): Location (stop ID, address, or coordinates)
-- `region_id` (str, optional): Region to search in
+- `region_id` (str, required): Region to search in
 - `distance` (int, optional): Search radius in meters (default: 500)
 - `type` (list[str], optional): Types to find (default: ["stop_area", "stop_point"])
 
@@ -134,7 +133,7 @@ Get upcoming departures from a stop.
 **Parameters:**
 
 - `stop_id` (str, required): Stop area or stop point ID
-- `region_id` (str, optional): Region ID
+- `region_id` (str, required): Region ID
 - `from_datetime` (str, optional): Start datetime for departures
 - `duration` (int, optional): Time window in seconds (default: 3600)
 
@@ -147,7 +146,7 @@ Get upcoming arrivals at a stop.
 **Parameters:**
 
 - `stop_id` (str, required): Stop area or stop point ID
-- `region_id` (str, optional): Region ID
+- `region_id` (str, required): Region ID
 - `from_datetime` (str, optional): Start datetime for arrivals
 - `duration` (int, optional): Time window in seconds (default: 3600)
 
@@ -166,7 +165,7 @@ Get service status for transit lines.
 **Parameters:**
 
 - `region_id` (str, required): Region ID
-- `line_id` (str, optional): Specific line ID to check
+- `resource_path` (str, optional): Path to specific line (e.g., 'lines/line:RAT:M1')
 
 **Returns:** Line status and disruption information
 
@@ -194,7 +193,7 @@ pytest
 navitia-mcp-server/
 ├── server.py           # Main MCP server implementation
 ├── pyproject.toml      # Project configuration
-├── README.md           # This file
+├── tools/              # MCP tools
 └── tests/              # Test suite
     └── test_server.py
 ```
